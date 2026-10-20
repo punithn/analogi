@@ -195,9 +195,25 @@
     </defs>
   </svg>
 
-  <header class="rail">
-    <!-- Menu button intentionally omitted, as in the original -->
-  </header>
+
+<header class="rail">
+  <a class="logo" href="#home" aria-label="Analogi home">Analogi</a>
+
+  <button
+    class="menu-btn"
+    id="menuBtn"
+    type="button"
+    aria-label="Open menu"
+    aria-controls="overlay"
+    aria-expanded="false"
+  >
+    <span></span>
+    <span></span>
+  </button>
+
+  <span class="pageno" id="pageno" aria-live="polite">01</span>
+</header>
+
 
   <!-- Navigation overlay -->
   <div
