@@ -1,64 +1,130 @@
-(function () {
-  var root = document.documentElement, $ = function (id) { return document.getElementById(id); };
-  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Contour form: concentric faceted outlines, drawn in one staggered moment
-  var svg = $('contour');
-  if (svg) {
-    var NS = 'http://www.w3.org/2000/svg', N = 15, K = 11,
-        sh = [1, .82, .95, .7, 1.02, .78, .93, .74, 1, .85, .9];
-    for (var i = 0; i < N; i++) {
-      var f = 1 - (i / N) * .92, pts = [];
-      for (var k = 0; k < K; k++) {
-        var a = (k / K) * Math.PI * 2 - .4,
-            r = 170 * f * (1 - (1 - sh[k]) * (1 - (i / N) * .6));
-        pts.push((Math.cos(a) * r + i * 1.5).toFixed(1) + ',' + (Math.sin(a) * r * .92 - i).toFixed(1));
-      }
-      var p = document.createElementNS(NS, 'polygon');
-      p.setAttribute('points', pts.join(' '));
-      p.setAttribute('pathLength', '1');
-      p.style.setProperty('--d', (i * 70) + 'ms');
-      svg.appendChild(p);
+(function () {
+  "use strict";
+
+  var root = document.documentElement;
+  var overlay = document.getElementById("overlay");
+  var openBtn = document.getElementById("menuBtn");
+  var closeBtn = document.getElementById("closeBtn");
+  var pageNumber = document.getElementById("pageno");
+
+  var reduceMotion = false;
+
+  if (window.matchMedia) {
+    reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+  }
+
+  // Keep Analogi in night mode. No paper/light theme toggle.
+  root.dataset.theme = "night";
+
+  try {
+    localStorage.setItem("analogi-theme", "night");
+  } catch (error) {
+    // The page still works if local storage is unavailable.
+  }
+
+  // Navigation menu
+  function setMenu(isOpen) {
+    if (!overlay) return;
+
+    overlay.classList.toggle("open", isOpen);
+    overlay.setAttribute("aria-hidden", String(!isOpen));
+    document.body.style.overflow = isOpen ? "hidden" : "";
+
+    if (openBtn) {
+      openBtn.setAttribute("aria-expanded", String(isOpen));
+    }
+
+    var focusTarget = isOpen ? closeBtn : openBtn;
+
+    if (focusTarget && typeof focusTarget.focus === "function") {
+      focusTarget.focus({ preventScroll: true });
     }
   }
 
-  // Theme: Paper / Night
-  $('theme').addEventListener('click', function () {
-    var t = root.dataset.theme === 'night' ? 'paper' : 'night';
-    root.dataset.theme = t;
-    try { localStorage.setItem('analogi-theme', t); } catch (e) {}
+  if (openBtn) {
+    openBtn.addEventListener("click", function () {
+      setMenu(true);
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", function () {
+      setMenu(false);
+    });
+  }
+
+  if (overlay) {
+    overlay.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        setMenu(false);
+      });
+    });
+
+    overlay.addEventListener("click", function (event) {
+      if (event.target === overlay) {
+        setMenu(false);
+      }
+    });
+  }
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && overlay &&
+        overlay.classList.contains("open")) {
+      setMenu(false);
+    }
   });
 
-  // Overlay menu
-  var ov = $('overlay'), openBtn = $('menuBtn'), closeBtn = $('closeBtn');
-  function setMenu(open) {
-    ov.classList.toggle('open', open);
-    ov.setAttribute('aria-hidden', !open);
-    openBtn.setAttribute('aria-expanded', open);
-    document.body.style.overflow = open ? 'hidden' : '';
-    (open ? closeBtn : openBtn).focus({ preventScroll: true });
-  }
-  openBtn.addEventListener('click', function () { setMenu(true); });
-  closeBtn.addEventListener('click', function () { setMenu(false); });
-  ov.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && ov.classList.contains('open')) setMenu(false); });
+  // Reveal content as it enters the viewport.
+  var revealItems = document.querySelectorAll(".rv");
 
-  // Reveal on scroll (once)
-  var rv = document.querySelectorAll('.rv');
-  if (!('IntersectionObserver' in window) || reduce) { rv.forEach(function (n) { n.classList.add('in'); }); }
-  else {
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold: .15 });
-    rv.forEach(function (n, i) { n.style.transitionDelay = (i % 3) * 80 + 'ms'; io.observe(n); });
+  if (
+    reduceMotion ||
+    !("IntersectionObserver" in window)
+  ) {
+    revealItems.forEach(function (item) {
+      item.classList.add("in");
+    });
+  } else {
+    var revealObserver = new IntersectionObserver(
+      function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+
+    revealItems.forEach(function (item, index) {
+      item.style.transitionDelay = (index % 3) * 80 + "ms";
+      revealObserver.observe(item);
+    });
   }
 
-  // Page number in the rail follows the section in view
-  var no = $('pageno');
-  if ('IntersectionObserver' in window) {
-    var so = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) no.textContent = e.target.dataset.n; });
-    }, { rootMargin: '-45% 0px -50% 0px' });
-    document.querySelectorAll('[data-n]').forEach(function (s) { so.observe(s); });
+  // Update the page number only when the number element exists.
+  if (
+    pageNumber &&
+    "IntersectionObserver" in window
+  ) {
+    var sectionObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            pageNumber.textContent =
+              entry.target.getAttribute("data-n") || "";
+          }
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+
+    document.querySelectorAll("[data-n]").forEach(function (section) {
+      sectionObserver.observe(section);
+    });
   }
 })();
