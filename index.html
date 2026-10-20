@@ -6,7 +6,7 @@
 <title>analogi · Design, translated for everyone who builds it</title>
 <meta name="description" content="Analogi carries one design intent across studios, makers and clients, in the language each one works in.">
 <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('analogi-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -23,7 +23,7 @@
 
 <header class="rail">
   <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="overlay" aria-label="Open menu"><span></span><span></span></button>
-  <button class="theme" id="theme" aria-label="Switch between Paper and Night theme"><svg class="ic"><use href="#i-theme"/></svg></button>
+
 </header>
 
 <div class="overlay night" id="overlay" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
@@ -41,22 +41,25 @@
 <section class="hero" id="home" data-n="01">
 	
   <div class="hero-copy">
-	  <img src="logo-white.svg" alt="Company Logo" width="200" height="auto">
+	  <img src="logo.svg" alt="Company Logo" width="300" height="auto">
     <h1 class="statement">Design, translated for everyone who builds it.</h1>
-    <p class="lead">Analogi carries one design intent across studios, makers and clients, in the language each one works in.</p>
+    <p class="title">Analogi carries one design intent across studios, makers and clients, in the language each one works in.</p>
     <div class="actions"><a class="btn" href="#partners">Become a design partner</a><a class="btn ghost" href="#pilot">See what's live</a></div>
   </div>
-  <div class="hero-form"><img src="lines0.svg" alt="" width="100%" height="100%"></div>
+  <div class="hero-form" style="position:;"><img src="lines0.svg"   width="100%" height="100%" ></div>
 </section>
 
 <section class="sec" id="problem" data-n="02">
   <div class="idx" style="width:"><div class="idx-in"><h2 class="title">The problem</h2><p style="font-size: 28px;" class="st" >Design happens in the studio. The work happens outside it.</p></div></div>
   <div class="body">
-    <div class="pad rv"><p class="lead">The work happens with fabricators, masons, artisans, vendors and suppliers. Each party speaks a different language.</p></div>
+    <div class="pad rv"><p class="title">The work happens with fabricators, masons, artisans, vendors and suppliers. Each party speaks a different language.</p></div>
     <div class="cells c3">
-      <div class="cell rv"><span class="lbl"><p class="val">Studios</p><ul class="lead"><li>Design</li></ul></div>
-      <div class="cell rv"><span class="lbl"><h3>Makers</h3><ul class="lead"><li>Clarity</li><li>Coordination</li><li>Communication</li><li>Money</li></ul></div>
-      <div class="cell rv"><span class="lbl"><h3>Clients</h3><ul class="lead"><li>Design</li><li>Money</li><li>Protecting their interests</li></ul></div>
+		      <div class="cell rv"><span class="lbl">
+				   <img src="studio.svg"   width="90px" height="90px%" >
+				  <span>	</span>
+				  <p class="val"><h3 style="font-size: 28px;" class="st">Studios</h3></p><ul class="lead"><li>Design</li></ul></div>
+      <div class="cell rv"><span class="lbl"><img src="studio.svg"   width="90px" height="90px%" ><h3 style="font-size: 28px;" class="st">Makers</h3><ul class="lead"><li>Clarity</li><li>Coordination</li><li>Communication</li><li>Money</li></ul></div>
+      <div class="cell rv"><img src="studio.svg"   width="90px" height="90px%" ><span class="lbl"><h3 style="font-size: 28px;" class="st">Clients</h3><ul class="lead"><li>Design</li><li>Money</li><li>Protecting their interests</li></ul></div>
     </div>
     <div class="pad rv"><p class="lead">The studio translates between all three by hand, carrying the risk and the expectations that never show up in a render. Meaning is lost between the drawing and the site, and that's where money and trust leak.</p></div>
   </div>
@@ -66,9 +69,9 @@
   <div class="idx"><div class="idx-in"><h2 class="title">What Analogi does</h2><p style="font-size: 28px;" class="st">One design intent, translated for each stakeholder.</p></div></div>
   <div class="body">
     <div class="cells c3">
-      <div class="cell rv"><svg class="ic"><use href="#i-scope"/></svg><span class="lead" >For makers</span><p class="val">Clear scopes and quantities, not a drawing set to interpret</p></div>
-      <div class="cell rv"><svg class="ic"><use href="#i-check"/></svg><span class="lead">For clients</span><p class="val">Cost and progress they can verify and sign off</p></div>
-      <div class="cell rv"><svg class="ic"><use href="#i-lock"/></svg><span class="lead">For the studio</span><p class="val">A locked record of what was agreed</p></div>
+      <div class="cell rv"><svg class="ic"><use href="#i-scope"/></svg><span class="lead" ><h3>For makers</h3></span><p class="val">Clear scopes and quantities, not a drawing set to interpret</p></div>
+      <div class="cell rv"><svg class="ic"><use href="#i-check"/></svg><span class="lead"><h3>For clients</h3></span><p class="val">Cost and progress they can verify and sign off</p></div>
+      <div class="cell rv"><svg class="ic"><use href="#i-lock"/></svg><span class="lead"><h3>For the studio</h3>For the studio</span><p class="val">A locked record of what was agreed</p></div>
     </div>
     <div class="pad row rv"><svg class="ic"><use href="#i-search"/></svg><p class="lead">Grounded in real project data. If it can't verify something, it says so instead of guessing.</p></div>
   </div>
@@ -89,11 +92,11 @@
   <div class="body">
     <div class="pad rv"><p class="lead">K&amp;Co. is a Bengaluru studio. Analogi runs there on real projects and real money.</p></div>
     <div class="cells c2">
-      <div class="cell rv"><span class="lbl">Live</span>
-        <ul class="ticks"><li><svg class="ic sm"><use href="#i-check"/></svg><p>Team and fee onboarding</p></li><li><svg class="ic sm"><use href="#i-check"/></svg>Guided drawing intake</li><li><svg class="ic sm"><use href="#i-check"/></svg>BOQ with sign-off gate</li></ul></div>
+      <div class="cell rv"><span class="st">Live</span>
+        <ul class="ticks"><li><svg class="ic lg"><use href="#i-check"/></svg><p style="padding-bottom: 30px">Team and fee onboarding</p></li><li><svg class="ic lg"><use href="#i-check"/></svg><p style="padding-bottom: 30px">Guided drawing intake</p></li><li><svg class="ic lg"><use href="#i-check"/></svg><p style="padding-bottom: 30px">BOQ with sign-off gate</p></li></ul></div>
       <!-- CONFIRM BEFORE PUBLISHING: the "Next" items below are unconfirmed -->
-      <div class="cell rv"><span class="lbl">Next</span>
-        <ul class="ticks"><li><svg class="ic sm"><use href="#i-next"/></svg>Vendor scopes</li><li><svg class="ic sm"><use href="#i-next"/></svg>Client updates</li><li><svg class="ic sm"><use href="#i-next"/></svg>Change orders</li></ul></div>
+      <div class="cell rv"><span class="st">Next</span>
+        <ul class="ticks"><li><svg class="ic lg"><use href="#i-next"/></svg><p style="padding-bottom: 30px">Vendor scopes</p></li><li><svg class="ic lg"><use href="#i-next"/></svg><p style="padding-bottom: 30px">Client updates</p></li><li><svg class="ic lg"><use href="#i-next"/></svg><p style="padding-bottom: 30px">Change orders</p></li></ul></div>
     </div>
   </div>
 </section>
@@ -102,10 +105,10 @@
   <div class="idx"><div class="idx-in"><h2 class="title">Design-partner programme</h2><p style="font-size: 28px;" class="st">Free access to the live system.</p></div></div>
   <div class="body">
     <div class="cells c2">
-      <div class="cell rv"><span class="lbl">In return</span><p class="val">Structured feedback and a say in what we build next</p></div>
-      <div class="cell rv"><span class="lbl">Cost</span><p class="val">No fee either way</p></div>
+      <div class="cell rv"><span class="st">In return</span><p class="val">Structured feedback and a say in what we build next</p></div>
+      <div class="cell rv"><span class="st">Cost</span><p class="val">No fee either way</p></div>
     </div>
-    <div class="pad rv"><a class="btn" href="mailto:name@analogi.in">Become a design partner</a></div>
+   
   </div>
 </section>
 
@@ -116,10 +119,14 @@
 </main>
 
 <footer class="foot">
-  <span class="wm"><img alt="" src="logo-white.svg" width="auto" height="60px"></span>
-  <span>Piloted live at K&amp;Co. Design Initiatives, Bengaluru</span>
-  <span><a href="https://analogi.in">analogi.in</a> · <a href="mailto:name@analogi.in">name@analogi.in</a> · <a href="#">LinkedIn</a></span>
-</footer>
-<script src="main.js"></script>
+	<div class="idx" style="width:">
+	   <div class="idx-in"><h2 class="title">Get in touch</h2>
+       <p style="font-size: 28px;" class="st" >hello@analogi.in</p>
+		<p style="font-size: 28px;" class="st" >+91 88808 03999</p></div></div>
+  <span class="wm"><img alt="" src="logo.svg" width="auto" height="220px"></span>
+	 
+<!--  <span><a href="https://analogi.in">analogi.in</a> 
+--></footer>
+<script src="js/main.js"></script>
 </body>
 </html>

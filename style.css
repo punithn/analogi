@@ -14,9 +14,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .rail{position:fixed;inset:0 auto 0 0;width:var(--rail);border-right:1px solid var(--line);background:var(--bg);display:flex;flex-direction:column;align-items:center;padding:24px 0;z-index:5;transition:background .5s,border-color .5s}
 .logo,.wm{font:800 14px/1 var(--sans);letter-spacing:-.045em}
 .menu-btn{position:relative;width:28px;height:20px;margin-top:10px}
-.menu-btn span{position:absolute;left:0;right:0;height:1px;background:currentColor;transition:transform .5s var(--ease),top .5s var(--ease)}
+.menu-btn span{position:absolute;left:0;right:0;height:2px;background:currentColor;transition:transform .5s var(--ease),top .5s var(--ease)}
 .menu-btn span:first-child{top:6px}.menu-btn span:last-child{top:13px}
-.menu-btn:hover span:first-child{top:4px}.menu-btn:hover span:last-child{top:15px}
+.menu-btn:hover span:first-child{top:-4px}.menu-btn:hover span:last-child{top:15px}
 .is-close span{top:9px!important}.is-close span:first-child{transform:rotate(45deg)}.is-close span:last-child{transform:rotate(-45deg)}
 .theme{margin-top:auto;padding:6px;transition:opacity .3s}.theme:hover{opacity:.6}
 .pageno{margin-top:20px;font-size:11px;color:var(--body)}
